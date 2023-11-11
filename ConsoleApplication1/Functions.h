@@ -11,14 +11,10 @@ using namespace std;
 
 namespace functions
 {
-
-	// Вспомогательные функции
-	// Генератор случайных целых чисел
 	int randInt(int start, int end) 
 	{
 		return start + rand() % (end - start + 1);
 	};
-	// Генератор случайных чисел с плавающей точкой
 	template<class Type>
 	Type Rand(int start, int end, int accuracy=0)
 	{
@@ -27,23 +23,17 @@ namespace functions
 		else
 			return randInt(start, end);
 	}
-	// Сравнение по умолчанию
 	template<class Type>
 	bool DefaultCompare(Type a, Type b)
 	{
 		return a > b;
 	}
-
-	// Задание 1. Заполнение случайными значениями
 	template<class Type>
 	void RandArray(Type arr[], int length, int start, int end, int accuracy=0)
 	{
 		for (int i = 0; i < length; i++)
 			arr[i] = Rand<Type>(start, end, accuracy);
 	}
-
-	// Задание 2. Вычисление суммы/произведения элементов
-	// Для суммы
 	template<class Type>
 	Type Summa(Type arr[], int length, int start, int end)
 	{
@@ -52,8 +42,6 @@ namespace functions
 			summa += arr[i];
 		return summa;
 	}
-
-	// Для произведения
 	template<class Type>
 	Type Product(Type arr[], int length, int start, int end)
 	{
@@ -62,9 +50,6 @@ namespace functions
 			prod *= arr[i];
 		return prod;
 	}
-
-	// Задание 3. Вставка и удаление элементов
-	// Сдвиг влево
 	template<class Type>
 	void Left(Type arr[], int length, int k) 
 	{
@@ -72,7 +57,6 @@ namespace functions
 			arr[i] = arr[i + 1];
 		arr[length - 1] = 0;
 	}
-	// Сдвиг вправо
 	template<class Type>
 	void Right(Type arr[], int length, int k) 
 	{
@@ -80,8 +64,6 @@ namespace functions
 			arr[i + 1] = arr[i];
 		arr[k] = 0;
 	}
-
-	// Вставка
 	template<class Type>
 	void Insert(Type arr[], int length, int k, int n)
 	{
@@ -99,16 +81,12 @@ namespace functions
 			arr[i] = arr[i + 1];
 		}
 	}
-	// Удаление
 	template<class Type>
 	void RemoveElems(Type arr[], int length, int start, int end)
 	{
 		for (int i = start; i <= end--; i++)
 			DeleteElem(arr, length--, i--);
 	}
-
-	// Задание 4. Сортировка массива
-	// Соритровка выбором
 	template<class Type>
 	void SelectionSort(Type arr[], int n, bool (*compare)(Type, Type) = DefaultCompare)
 	{
@@ -126,7 +104,6 @@ namespace functions
 			arr[j] = var;
 		}
 	}
-	// Пузырьковая сортировка
 	template<class Type>
 	void BubbleSort(Type arr[], int n, bool (*compare)(Type, Type) = DefaultCompare)
 	{
@@ -141,7 +118,6 @@ namespace functions
 			}
 		}
 	}
-	// Сортировка вставками
 	template<class Type>
 	void InsertionSort(Type arr[], int n, bool (*compare)(Type, Type) = DefaultCompare)
 	{
@@ -157,9 +133,6 @@ namespace functions
 			}
 		}
 	}
-
-	// Задание 5. Мин/Макс
-	// Мин
 	template<class Type>
 	int Min(Type arr[], int n)
 	{
@@ -169,7 +142,6 @@ namespace functions
 				idx = i;
 		return idx;
 	}
-	// Макс
 	template<class Type>
 	int Max(Type arr[], int n)
 	{
@@ -179,8 +151,6 @@ namespace functions
 				idx = i;
 		return idx;
 	}
-
-	// Задание 6.Бинарный поиск
 	template<class Type>
 	int BinSearch(Type arr[], int start, int end, int elem)
 	{
@@ -195,7 +165,6 @@ namespace functions
 		}
 		return -1;
 	}
-	// Задание 6. Линейый поиск
 	template<class Type>
 	int LinSearch(Type arr[], int start, int end, Type elem)
 	{
@@ -205,8 +174,6 @@ namespace functions
 		}
 		return -1;
 	}
-	// Задание 7. Подсчёт элементов
-	// Предикаты
 	template<class Type>
 	bool plus(Type n) { return n > 0; }
 	template<class Type>
@@ -215,7 +182,6 @@ namespace functions
 	bool null(Type n) { return n == 0; }
 	template<class Type>
 	bool krat_m(Type n, Type m) { return n % m == 0; }
-	// Функции, использующие предикаты
 	template<class Type>
 	int counter_n(Type arr[], int n, bool pred(Type n)) {
 		int c = 0;
@@ -231,28 +197,19 @@ namespace functions
 				c++;
 		return c;
 	}
-	// Основные функции с использованием предикатов
-	// Положительные
 	template<class Type>
 	Type count_pos(Type arr[], int n) { return counter_n(arr, n, plus); }
-	// Отрицательные
 	template<class Type>
 	Type count_neg(Type arr[], int n) { return counter_n(arr, n, minus); }
-	// Нулевые
 	template<class Type>
 	Type count_null(Type arr[], int n) { return counter_n(arr, n, null); }
-	// Кратные M
 	int count_krat_m(int arr[], int n, int m) { return counter_nm(arr, n, m, krat_m); }
-
-	// Задание 8. Ввод/Вывод
-	// Консольный ввод
 	template<class Type>
 	void CIn(Type arr[], int length)
 	{
 		for (int i = 0; i < length; i++)
 			cin >> arr[i];
 	}
-	// Консольный вывод
 	template<class Type>
 	void COut(Type arr[], int length)
 	{
@@ -260,7 +217,6 @@ namespace functions
 			cout << arr[i] << " ";
 		cout << endl;
 	}
-	// Файловый ввод TXT
 	template<class Type>
 	void FInTXT(Type arr[], int length, string fileName)
 	{
@@ -273,7 +229,6 @@ namespace functions
 			arr[i] = stoi(str);
 		}
 	}
-	// Файловый вывод TXT
 	template<class Type>
 	void FOutTXT(Type arr[], int length, const char* fileName)
 	{
@@ -283,8 +238,6 @@ namespace functions
 			fout << to_string(arr[i]) + "\n";
 		}
 	}
-
-	// Файловый ввод BIN
 	template<class Type>
 	void FInBIN(Type arr[], int length, string fileName)
 	{
@@ -292,8 +245,6 @@ namespace functions
 		for (int i = 0; i < length; i++)
 			fin.read((char*)&arr[i], sizeof arr[i]);
 	}
-
-	// Файловый вывод BIN
 	template<class Type>
 	void FOutBIN(Type arr[], int length, string fileName)
 	{
@@ -302,15 +253,6 @@ namespace functions
 			fout.write((char*)&arr[i], sizeof arr[i]);
 	}
 
-	// Адаптация функций к решению варианта 6
-	// Ex A
-	// Сравнение по умолчанию (Описан ранее)
-	//template<class Type>
-	//bool DefaultCompare(Type a, Type b)
-	//{
-	//	return a > b;
-	//}
-	// Нахождение максимума
 	template<class Type>
 	int Max(Type arr[], int n, bool (*compare)(Type, Type) = DefaultCompare)
 	{
